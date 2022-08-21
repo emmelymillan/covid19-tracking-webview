@@ -20,32 +20,45 @@
     <ProgressBar
         android:id="@+id/progressBar1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="550dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="630dp"
+        android:layout_marginBottom="30dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/teal_200"
+        android:indeterminateTintMode="src_atop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vigilancia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="180dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="Vigilancia Covid-19"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ImageV"
+        android:layout_width="239dp"
+        android:layout_height="373dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/teal_200"
-        />
+        app:srcCompat="@drawable/ass" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/ImageV"-->
-<!--            android:layout_width="411dp"-->
-<!--            android:layout_height="718dp"-->
-<!--            android:layout_marginStart="200dp"-->
-<!--            android:layout_marginTop="100dp"-->
-<!--            android:layout_marginEnd="200dp"-->
-<!--            android:layout_marginBottom="200dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@mipmap/ic_launcher_foreground" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

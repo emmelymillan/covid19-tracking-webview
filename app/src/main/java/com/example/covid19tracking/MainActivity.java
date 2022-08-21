@@ -13,7 +13,9 @@ import android.webkit.WebView;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     WebView miVisorWeb;
     final String url = "https://covid19-tracking-em.herokuapp.com";
     private ProgressBar spinner;
+    private ImageView imag;
+    private TextView vig;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         miVisorWeb = (WebView) findViewById(R.id.visorWeb);
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         miVisorWeb.setWebViewClient(new CustomWebViewClient());
+        imag = (ImageView) findViewById(R.id.ImageV);
+        vig = (TextView) findViewById(R.id.vigilancia);
 
         final WebSettings ajustesVisorWeb = miVisorWeb.getSettings();
         ajustesVisorWeb.setDomStorageEnabled(true); // Permite localStorage
@@ -61,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
             ShowOrHideWebViewInitialUse = "hide";
             spinner.setVisibility(View.GONE);
+            imag.setVisibility(View.GONE);
+            vig.setVisibility(View.GONE);
 
             view.setVisibility(miVisorWeb.VISIBLE);
             super.onPageFinished(view, url);
