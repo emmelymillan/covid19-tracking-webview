@@ -10,12 +10,19 @@ import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import android.graphics.Bitmap;
+import android.view.View;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    String ShowOrHideWebViewInitialUse = "show";
     WebView miVisorWeb;
     final String url = "https://covid19-tracking-em.herokuapp.com";
+    private ProgressBar spinner;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -25,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         miVisorWeb = (WebView) findViewById(R.id.visorWeb);
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        miVisorWeb.setWebViewClient(new CustomWebViewClient());
 
         final WebSettings ajustesVisorWeb = miVisorWeb.getSettings();
         ajustesVisorWeb.setDomStorageEnabled(true); // Permite localStorage
@@ -32,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             miVisorWeb.loadUrl(url);
+        }
+    }
+
+    // This allows for a splash screen
+    // (and hide elements once the page loads)
+    private class CustomWebViewClient extends WebViewClient {
+
+        @Override
+        public void onPageStarted(WebView webview, String url, Bitmap favicon) {
+            // only make it invisible the FIRST time the app is run
+            if (ShowOrHideWebViewInitialUse.equals("show")) {
+                webview.setVisibility(webview.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+
+            ShowOrHideWebViewInitialUse = "hide";
+            spinner.setVisibility(View.GONE);
+
+            view.setVisibility(miVisorWeb.VISIBLE);
+            super.onPageFinished(view, url);
+
         }
     }
 
