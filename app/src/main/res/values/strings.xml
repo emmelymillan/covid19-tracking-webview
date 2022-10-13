@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Vigilancia Covid-19</string>
+
+    <string name="msg_waiting">Conectando con el servidor. Por favor, espere un momento</string>
 </resources>

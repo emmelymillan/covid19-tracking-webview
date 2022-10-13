@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     String ShowOrHideWebViewInitialUse = "show";
     WebView miVisorWeb;
     final String url = "https://covid19-tracking-em.herokuapp.com";
-    private ProgressBar spinner;
+    private ProgressBar progressBar;
     private ImageView imag;
     private TextView vig;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         miVisorWeb = (WebView) findViewById(R.id.visorWeb);
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar1);
         miVisorWeb.setWebViewClient(new CustomWebViewClient());
         imag = (ImageView) findViewById(R.id.ImageV);
         vig = (TextView) findViewById(R.id.vigilancia);
@@ -48,8 +52,19 @@ public class MainActivity extends AppCompatActivity {
         ajustesVisorWeb.setDomStorageEnabled(true); // Permite localStorage
         ajustesVisorWeb.setJavaScriptEnabled(true); // Permite JavaScript
 
-        if (savedInstanceState == null) {
-            miVisorWeb.loadUrl(url);
+
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            if (savedInstanceState == null) {
+                miVisorWeb.loadUrl(url);
+            }
+        } else {
+            vig.setText("Dispositivo sin internet");
+            progressBar.setVisibility(View.GONE);
+            imag.setImageResource(R.drawable.ic_signal_wifi_connected_no_internet_4_24);
         }
     }
 
@@ -67,13 +82,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onPageFinished(WebView view, String url) {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ShowOrHideWebViewInitialUse = "hide";
+                    progressBar.setVisibility(View.GONE);
+                    imag.setVisibility(View.GONE);
+                    vig.setVisibility(View.GONE);
+                    view.setVisibility(miVisorWeb.VISIBLE);
+                }
+            }, 2500);
 
-            ShowOrHideWebViewInitialUse = "hide";
-            spinner.setVisibility(View.GONE);
-            imag.setVisibility(View.GONE);
-            vig.setVisibility(View.GONE);
-
-            view.setVisibility(miVisorWeb.VISIBLE);
             super.onPageFinished(view, url);
 
         }

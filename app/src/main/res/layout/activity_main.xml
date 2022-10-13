@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <WebView
+        android:visibility="gone"
         android:id="@+id/visorWeb"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -19,7 +20,8 @@
 
     <ProgressBar
         android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
@@ -35,12 +37,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+
         android:id="@+id/vigilancia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="180dp"
         android:fontFamily="sans-serif-thin"
-        android:text="Vigilancia Covid-19"
+        android:text="@string/msg_waiting"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:src="@mipmap/ic_launcher_foreground"
         android:id="@+id/ImageV"
         android:layout_width="239dp"
         android:layout_height="373dp"
@@ -59,6 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ass" />
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
